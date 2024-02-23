@@ -1,0 +1,41 @@
+type Post{
+  id: ID!,
+  header: String!,
+  content: String!,
+  base64img: String,
+  category: Category!
+}
+type Category{
+  id: ID!,
+  name: String!
+}
+type User{
+  id: ID!,
+  username: String!,
+  email: String!,
+  password: String!
+  base64img: String!
+}
+type Role{
+  id: ID!,
+  name: String!
+}
+schema {
+  query: Query
+  mutation: Mutation
+}
+type Query {
+  findByHeader(header: String): Post
+  getAll:[User]
+  findByNameEquals(name: String): [User]
+  findByCategory(name: String): Post
+  getAllRoles:[Role]
+}
+type Mutation {
+  createPost(header: String!, content: String!, base64img: String, categoryName: String): Post!
+  createCategory(name: String): Category!
+  deleteCategory(id: ID!): String!
+  deletePost(id: ID!):String!
+  addPhoto(username: String!, base64img: String!): User!
+}
+
